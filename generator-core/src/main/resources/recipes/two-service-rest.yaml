@@ -1,0 +1,7 @@
+name: two-service-rest
+description: Two Spring REST services with optional PostgreSQL and FEIGN-style call contract
+inputs:
+  - serviceAName
+  - serviceBName
+  - entityName
+  - usePostgres

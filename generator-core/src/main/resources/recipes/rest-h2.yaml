@@ -1,0 +1,5 @@
+name: rest-h2
+description: Single Spring REST service with H2
+inputs:
+  - serviceName
+  - entityName
