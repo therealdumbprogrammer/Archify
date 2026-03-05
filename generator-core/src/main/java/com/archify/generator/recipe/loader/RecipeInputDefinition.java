@@ -1,16 +1,9 @@
-package com.archify.generator.domain;
+package com.archify.generator.recipe.loader;
 
-public class Field {
+public class RecipeInputDefinition {
     private String name;
     private String type;
-
-    public Field() {
-    }
-
-    public Field(String name, String type) {
-        this.name = name;
-        this.type = type;
-    }
+    private boolean required;
 
     public String getName() {
         return name;
@@ -26,5 +19,13 @@ public class Field {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
     }
 }

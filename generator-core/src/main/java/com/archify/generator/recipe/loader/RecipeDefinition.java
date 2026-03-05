@@ -6,7 +6,7 @@ import java.util.List;
 public class RecipeDefinition {
     private String name;
     private String description;
-    private List<String> inputs = new ArrayList<>();
+    private List<RecipeInputDefinition> inputs = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -24,11 +24,11 @@ public class RecipeDefinition {
         this.description = description;
     }
 
-    public List<String> getInputs() {
+    public List<RecipeInputDefinition> getInputs() {
         return inputs;
     }
 
-    public void setInputs(List<String> inputs) {
+    public void setInputs(List<RecipeInputDefinition> inputs) {
         this.inputs = inputs;
     }
 }

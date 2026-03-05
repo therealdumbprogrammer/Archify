@@ -8,6 +8,7 @@ import com.archify.generator.packaging.ZipAssembler;
 import com.archify.generator.recipe.expander.ExpanderRegistry;
 import com.archify.generator.recipe.expander.RecipeExpander;
 import com.archify.generator.recipe.loader.RecipeDefinition;
+import com.archify.generator.recipe.loader.RecipeInputDefinition;
 import com.archify.generator.recipe.loader.RecipeLoader;
 import com.archify.generator.template.TemplateEngine;
 import com.archify.generator.validation.ArchitectureValidator;
@@ -26,7 +27,8 @@ public class ArchifyGeneratorFacade {
         this.recipeLoader = new RecipeLoader();
         this.expanderRegistry = new ExpanderRegistry();
         this.validator = new ArchitectureValidator();
-        this.projectGenerator = new ProjectGenerator(new ServiceGenerator(new TemplateEngine()));
+        TemplateEngine templateEngine = new TemplateEngine();
+        this.projectGenerator = new ProjectGenerator(new ServiceGenerator(templateEngine), templateEngine);
         this.zipAssembler = new ZipAssembler();
     }
 
@@ -38,15 +40,23 @@ public class ArchifyGeneratorFacade {
         Architecture architecture = expander.expand(config);
         validator.validate(architecture);
 
-        List<FileLeaf> files = projectGenerator.generate(architecture);
+        List<FileLeaf> files = projectGenerator.generate(definition.getName(), architecture);
         return zipAssembler.zip(files);
     }
 
+    public List<RecipeDefinition> listRecipes() {
+        return recipeLoader.loadAll();
+    }
+
     private void validateInputs(RecipeDefinition definition, Map<String, Object> config) {
-        for (String input : definition.getInputs()) {
-            Object value = config.get(input);
-            if (value == null || value.toString().isBlank()) {
-                throw new IllegalArgumentException("Missing required input for recipe '" + definition.getName() + "': " + input);
+        for (RecipeInputDefinition input : definition.getInputs()) {
+            if (!input.isRequired()) {
+                continue;
+            }
+            Object value = config.get(input.getName());
+            if (value == null || (value instanceof String stringValue && stringValue.isBlank())) {
+                throw new IllegalArgumentException(
+                        "Missing required input for recipe '" + definition.getName() + "': " + input.getName());
             }
         }
     }

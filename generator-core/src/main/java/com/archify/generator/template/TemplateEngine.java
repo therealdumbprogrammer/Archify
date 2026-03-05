@@ -10,7 +10,7 @@ import java.io.StringWriter;
 import java.util.Map;
 
 public class TemplateEngine {
-    private static final String TEMPLATE_BASE_PATH = "/templates/spring";
+    private static final String TEMPLATE_BASE_PATH = "/templates";
 
     private final Configuration configuration;
 

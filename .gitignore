@@ -31,3 +31,17 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### UI / Node ###
+ui/node_modules/
+ui/dist/
+ui/.vite/
+ui/*.tsbuildinfo
+ui/vite.config.js
+ui/vite.config.d.ts
+ui/.env
+ui/.env.local
+ui/.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

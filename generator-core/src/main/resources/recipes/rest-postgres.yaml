@@ -1,5 +1,9 @@
 name: rest-postgres
-description: Single Spring REST service with PostgreSQL
+description: Single Spring Boot REST service with PostgreSQL
 inputs:
-  - serviceName
-  - entityName
+  - name: serviceName
+    type: string
+    required: true
+  - name: entities
+    type: entityList
+    required: true

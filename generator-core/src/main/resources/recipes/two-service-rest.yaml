@@ -1,7 +1,18 @@
 name: two-service-rest
-description: Two Spring REST services with optional PostgreSQL and FEIGN-style call contract
+description: Two Spring Boot REST services communicating via Feign
 inputs:
-  - serviceAName
-  - serviceBName
-  - entityName
-  - usePostgres
+  - name: serviceAName
+    type: string
+    required: true
+  - name: serviceBName
+    type: string
+    required: true
+  - name: entities
+    type: entityList
+    required: true
+  - name: communication
+    type: communication
+    required: true
+  - name: database
+    type: databaseType
+    required: true

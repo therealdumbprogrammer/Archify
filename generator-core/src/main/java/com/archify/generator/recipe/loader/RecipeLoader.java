@@ -5,11 +5,15 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 public class RecipeLoader {
     private static final String RECIPE_PATH_PREFIX = "recipes/";
     private static final String YAML_SUFFIX = ".yaml";
+    private static final List<String> KNOWN_RECIPES = List.of("rest-h2", "rest-postgres", "two-service-rest");
 
     private final ObjectMapper yamlMapper = new ObjectMapper(new YAMLFactory());
 
@@ -24,5 +28,14 @@ public class RecipeLoader {
         } catch (IOException exception) {
             throw new IllegalStateException("Failed to load recipe: " + recipeName, exception);
         }
+    }
+
+    public List<RecipeDefinition> loadAll() {
+        List<RecipeDefinition> definitions = new ArrayList<>();
+        for (String recipeName : KNOWN_RECIPES) {
+            definitions.add(load(recipeName));
+        }
+        definitions.sort(Comparator.comparing(RecipeDefinition::getName));
+        return definitions;
     }
 }
