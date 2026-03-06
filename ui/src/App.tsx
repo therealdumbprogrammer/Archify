@@ -9,7 +9,7 @@ import StepIndicator from './components/StepIndicator';
 import YamlEditor from './components/YamlEditor';
 import { ArchitectureSpec, EntityConfig, RecipeDefinition } from './types';
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8080';
+const API_BASE = import.meta.env.VITE_API_URL;
 
 type Mode = 'form' | 'yaml';
 type InputMethod = 'recipe' | 'yaml';
@@ -155,13 +155,13 @@ export default function App() {
 
       const blob = await response.blob();
       const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
+      const url = window.URL.createObjectURL(blob);
       link.href = url;
-      link.download = 'generated-project.zip';
+      link.download = 'archify-project.zip';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(url);
       setStatus('ZIP generated and download started.');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Failed to generate project';
