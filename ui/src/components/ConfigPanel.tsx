@@ -69,6 +69,7 @@ export default function ConfigPanel({ recipe, config, onConfigChange }: ConfigPa
         return (
           <div key={input.name} className="space-y-1">
             <label className="text-sm text-slate-300">{input.name}</label>
+            {inputHelpText(input.name) && <p className="text-xs text-slate-400">{inputHelpText(input.name)}</p>}
             <input
               className="w-full rounded border border-slate-600 bg-slate-950 px-3 py-2"
               value={String(config[input.name] ?? '')}
@@ -100,4 +101,11 @@ function normalizeEntities(value: unknown): EntityConfig[] {
       fields: [{ name: 'id', type: 'Long' }, ...withoutId]
     };
   });
+}
+
+function inputHelpText(inputName: string): string {
+  if (inputName === 'serviceName' || inputName === 'serviceAName' || inputName === 'serviceBName') {
+    return 'Service name becomes the generated app/module name (example: user-service).';
+  }
+  return '';
 }

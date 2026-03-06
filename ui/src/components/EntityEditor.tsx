@@ -56,6 +56,9 @@ export default function EntityEditor({ entities, onChange }: EntityEditorProps) 
           Add Entity
         </button>
       </div>
+      <p className="text-xs text-slate-400">
+        Entity = domain object/table (example: User). Field = property/column (example: email as String).
+      </p>
       {entities.map((entity, entityIndex) => (
         <div key={entityIndex} className="rounded-lg border border-slate-700 bg-slate-900/60 p-3">
           <div className="mb-2 flex items-center gap-2">
