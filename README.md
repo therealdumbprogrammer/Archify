@@ -1,62 +1,36 @@
 # Archify
 
-Archify is a local full-stack project generator:
-- `backend/`: Spring Boot API that exposes recipes and returns generated ZIP projects.
-- `ui/`: React + Vite UI for selecting a recipe and generating a project.
-- `generator-core/`: Core generation engine used by the backend.
+Archify helps you generate starter backend projects from a guided UI.
 
-## Prerequisites
+## Archify UI
 
-- Java 17
-- Maven 3.9+
-- Node.js (tested with v24) and npm
+Open the deployed app: `https://archify-brown.vercel.app`
 
-## Local Run
+For local development setup, see [LOCAL_RUN.md](./LOCAL_RUN.md).
 
-1. Start backend (from repo root):
+## Quick Start
 
-```bash
-mvn -pl backend -am spring-boot:run
-```
+1. Open Archify UI.
+2. In **Step 1**, choose a recipe card (or switch to YAML Spec mode).
+3. In **Step 2**, configure your architecture:
+- Set service name
+- Add/edit entities
+- Add/edit fields and types
+4. In **Step 3**, click **Generate Project**.
+5. Your ZIP downloads automatically as `archify-project.zip`.
 
-Backend runs on `http://localhost:8080`.
+## YAML Mode (Optional)
 
-2. Start UI (new terminal):
+1. In **Step 1**, select **YAML Spec**.
+2. Paste your YAML configuration.
+3. Click **Apply YAML And Continue**.
+4. Continue in either:
+- **Form Mode** for guided edits, or
+- **YAML Mode** for direct YAML editing.
 
-```bash
-cd ui
-npm install
-npm run dev
-```
+## Naming Guide
 
-UI runs on `http://localhost:5173`.
-
-3. Open the app:
-- Visit `http://localhost:5173`
-- Select a recipe, edit config (form or YAML), click **Generate**, and download the ZIP.
-
-## Useful Commands
-
-From repo root:
-
-```bash
-# Build all Maven modules
-mvn clean install
-```
-
-From `ui/`:
-
-```bash
-# Production build
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-## API Endpoints (Backend)
-
-- `GET /recipes` - list available generation recipes
-- `POST /generate` - generate and download ZIP (`application/zip`)
-
-Note: backend CORS currently allows `http://localhost:5173`.
+- `serviceName`: generated service/module name (example: `user-service`)
+- `Entity`: domain object/table (example: `User`, `Order`)
+- `Field`: property/column inside an entity (example: `email`, `createdAt`)
+- `id` field is managed as `Long` by default
