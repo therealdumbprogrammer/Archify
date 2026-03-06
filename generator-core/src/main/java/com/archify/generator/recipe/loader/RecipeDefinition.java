@@ -7,6 +7,7 @@ public class RecipeDefinition {
     private String name;
     private String description;
     private List<RecipeInputDefinition> inputs = new ArrayList<>();
+    private DiagramDefinition diagram;
 
     public String getName() {
         return name;
@@ -30,5 +31,13 @@ public class RecipeDefinition {
 
     public void setInputs(List<RecipeInputDefinition> inputs) {
         this.inputs = inputs;
+    }
+
+    public DiagramDefinition getDiagram() {
+        return diagram;
+    }
+
+    public void setDiagram(DiagramDefinition diagram) {
+        this.diagram = diagram;
     }
 }

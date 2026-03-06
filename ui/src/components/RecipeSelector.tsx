@@ -8,20 +8,42 @@ type RecipeSelectorProps = {
 
 export default function RecipeSelector({ recipes, selectedRecipe, onSelect }: RecipeSelectorProps) {
   return (
-    <section className="rounded-xl border border-slate-700 bg-panel/90 p-4">
-      <h2 className="mb-3 text-lg font-semibold">Recipe</h2>
-      <select
-        className="w-full rounded-md border border-slate-600 bg-slate-900 px-3 py-2"
-        value={selectedRecipe}
-        onChange={(event) => onSelect(event.target.value)}
-      >
-        <option value="">Select a recipe</option>
-        {recipes.map((recipe) => (
-          <option key={recipe.name} value={recipe.name}>
-            {recipe.name} - {recipe.description}
-          </option>
-        ))}
-      </select>
+    <section className="space-y-3 rounded-xl border border-slate-700/80 bg-panel/90 p-4">
+      <h2 className="text-lg font-semibold">Select Recipe</h2>
+      <div className="grid gap-3">
+        {recipes.map((recipe) => {
+          const selected = recipe.name === selectedRecipe;
+          return (
+            <button
+              key={recipe.name}
+              type="button"
+              onClick={() => onSelect(recipe.name)}
+              className={`rounded-lg border p-4 text-left transition ${
+                selected
+                  ? 'border-accent bg-accent/10'
+                  : 'border-slate-700 bg-slate-950/50 hover:border-slate-500 hover:bg-slate-950/80'
+              }`}
+            >
+              <h3 className="font-semibold text-white">{recipe.name}</h3>
+              <p className="mt-1 text-sm text-slate-300">{recipe.description}</p>
+              <p className="mt-3 text-xs text-slate-400">{recipePreviewText(recipe)}</p>
+            </button>
+          );
+        })}
+      </div>
     </section>
   );
+}
+
+function recipePreviewText(recipe: RecipeDefinition): string {
+  if (recipe.diagram && recipe.diagram.nodes.length > 0) {
+    const names = recipe.diagram.nodes.map((node) => node.label).join(' -> ');
+    return `Preview: ${names}`;
+  }
+
+  if (recipe.name === 'two-service-rest') {
+    return 'Preview: serviceA -> serviceB';
+  }
+
+  return recipe.name.includes('postgres') ? 'Preview: service -> postgres' : 'Preview: service -> h2';
 }

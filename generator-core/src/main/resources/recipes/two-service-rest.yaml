@@ -1,5 +1,15 @@
 name: two-service-rest
 description: Two Spring Boot REST services communicating via Feign
+diagram:
+  nodes:
+    - id: serviceA
+      label: serviceAName
+    - id: serviceB
+      label: serviceBName
+  edges:
+    - source: serviceA
+      target: serviceB
+      label: REST
 inputs:
   - name: serviceAName
     type: string

@@ -1,5 +1,15 @@
 name: rest-h2
 description: Single Spring Boot REST service with H2
+diagram:
+  nodes:
+    - id: service
+      label: serviceName
+    - id: database
+      label: h2
+  edges:
+    - source: service
+      target: database
+      label: JDBC
 inputs:
   - name: serviceName
     type: string
