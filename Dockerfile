@@ -7,7 +7,8 @@ COPY backend/pom.xml backend/pom.xml
 COPY generator-core/src generator-core/src
 COPY backend/src backend/src
 
-RUN mvn -B -DskipTests clean package spring-boot:repackage -pl backend -am
+RUN mvn -B -DskipTests clean install -pl backend -am \
+ && mvn -B -DskipTests -f backend/pom.xml spring-boot:repackage
 
 FROM eclipse-temurin:17-jre
 WORKDIR /app
