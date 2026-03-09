@@ -3,13 +3,23 @@ import { RecipeDefinition } from '../types';
 type RecipeSelectorProps = {
   recipes: RecipeDefinition[];
   selectedRecipe: string;
+  loadingRecipes: boolean;
   onSelect: (recipeName: string) => void;
 };
 
-export default function RecipeSelector({ recipes, selectedRecipe, onSelect }: RecipeSelectorProps) {
+export default function RecipeSelector({ recipes, selectedRecipe, loadingRecipes, onSelect }: RecipeSelectorProps) {
   return (
     <section className="space-y-3 rounded-xl border border-slate-700/80 bg-panel/90 p-4">
       <h2 className="text-lg font-semibold">Select Recipe</h2>
+      <p
+        className={`rounded-md border px-3 py-2 text-sm ${
+          loadingRecipes
+            ? 'border-amber-400/60 bg-amber-400/15 text-amber-200'
+            : 'border-amber-500/35 bg-amber-500/10 text-amber-100'
+        }`}
+      >
+        Free-tier backend: recipe loading can take up to 1 minute. If recipes do not appear, try refresh.
+      </p>
       <div className="grid gap-3">
         {recipes.map((recipe) => {
           const selected = recipe.name === selectedRecipe;

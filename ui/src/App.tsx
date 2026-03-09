@@ -9,7 +9,7 @@ import StepIndicator from './components/StepIndicator';
 import YamlEditor from './components/YamlEditor';
 import { ArchitectureSpec, EntityConfig, RecipeDefinition } from './types';
 
-const API_BASE = import.meta.env.VITE_API_URL;
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8080').replace(/\/$/, '');
 
 type Mode = 'form' | 'yaml';
 type InputMethod = 'recipe' | 'yaml';
@@ -232,7 +232,12 @@ export default function App() {
               </section>
 
               {inputMethod === 'recipe' ? (
-                <RecipeSelector recipes={recipes} selectedRecipe={selectedRecipe} onSelect={handleRecipeSelect} />
+                <RecipeSelector
+                  recipes={recipes}
+                  selectedRecipe={selectedRecipe}
+                  onSelect={handleRecipeSelect}
+                  loadingRecipes={loadingRecipes}
+                />
               ) : (
                 <section className="space-y-3 rounded-xl border border-slate-700/80 bg-panel/90 p-4">
                   <div className="flex flex-wrap gap-2">
@@ -291,8 +296,6 @@ export default function App() {
               <p className="mt-3 text-sm text-slate-300">{status || 'Generated ZIP download status will appear here.'}</p>
             </section>
           )}
-
-          {loadingRecipes && <p className="text-sm text-slate-300">Loading recipes...</p>}
         </div>
 
         <ArchitecturePreview recipe={currentRecipe} config={config} />
