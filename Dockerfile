@@ -1,4 +1,4 @@
-FROM maven:3.9.9-eclipse-temurin-17 AS build
+FROM maven:3.9.9-eclipse-temurin-25 AS build
 WORKDIR /app
 
 COPY pom.xml ./
@@ -9,7 +9,7 @@ COPY backend/src backend/src
 
 RUN mvn -B -DskipTests clean package -pl backend -am
 
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:25-jre
 WORKDIR /app
 
 RUN useradd --create-home --uid 10001 appuser

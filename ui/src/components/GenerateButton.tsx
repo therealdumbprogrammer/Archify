@@ -7,11 +7,11 @@ export default function GenerateButton({ disabled, onClick }: GenerateButtonProp
   return (
     <button
       type="button"
-      className="w-full rounded-lg bg-accent px-5 py-4 text-base font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+      className="w-full rounded-lg bg-accent px-5 py-4 text-base font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 md:w-auto"
       disabled={disabled}
       onClick={onClick}
     >
-      Generate Spring Boot Project
+      Generate Project ZIP
     </button>
   );
 }

@@ -4,7 +4,7 @@ This guide is for developers running Archify locally.
 
 ## Prerequisites
 
-- Java 17
+- Java 25
 - Maven 3.9+
 - Node.js (tested with v24) and npm
 

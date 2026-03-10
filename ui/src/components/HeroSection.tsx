@@ -12,9 +12,9 @@ export default function HeroSection({ onHomeClick }: HeroSectionProps) {
       >
         Archify
       </button>
-      <h1 className="mt-2 text-xl font-semibold text-slate-200">Architecture {'->'} Spring Boot Code</h1>
+      <h1 className="mt-2 text-xl font-semibold text-slate-200">Project Recipe {'->'} Spring Boot Code</h1>
       <p className="mt-3 max-w-2xl text-slate-300">
-        Generate fully wired Spring Boot services from architecture recipes.
+        Generate fully wired Spring Boot services from project recipes.
       </p>
     </section>
   );

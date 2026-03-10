@@ -14,7 +14,7 @@ export default function ArchitecturePreview({ recipe, config }: ArchitecturePrev
 
   return (
     <section className="h-[560px] rounded-xl border border-slate-700/80 bg-panel/90 p-3">
-      <h2 className="mb-3 text-lg font-semibold">Architecture Preview</h2>
+      <h2 className="mb-3 text-lg font-semibold">Project Preview</h2>
       <div className="h-[500px] rounded-lg border border-slate-700 bg-slate-950/50">
         <ReactFlow fitView nodes={graph.nodes} edges={graph.edges} proOptions={{ hideAttribution: true }}>
           <Background color="#334155" gap={20} />

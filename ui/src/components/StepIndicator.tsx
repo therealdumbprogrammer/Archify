@@ -6,8 +6,7 @@ type StepIndicatorProps = {
 
 const STEPS = [
   { id: 1, label: 'Select Recipe' },
-  { id: 2, label: 'Configure Architecture' },
-  { id: 3, label: 'Generate Project' }
+  { id: 2, label: 'Configure Project' }
 ];
 
 export default function StepIndicator({ currentStep, maxAvailableStep, onStepSelect }: StepIndicatorProps) {

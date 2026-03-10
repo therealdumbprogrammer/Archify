@@ -8,8 +8,8 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <java.version>17</java.version>
-        <spring.boot.version>3.3.2</spring.boot.version>
+        <java.version>25</java.version>
+        <spring.boot.version>4.0.2</spring.boot.version>
     </properties>
 
     <dependencyManagement>
@@ -17,7 +17,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.3.2</version>
+                <version>4.0.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

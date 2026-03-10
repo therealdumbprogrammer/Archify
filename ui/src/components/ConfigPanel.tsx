@@ -22,7 +22,7 @@ export default function ConfigPanel({ recipe, config, onConfigChange }: ConfigPa
 
   return (
     <section className="space-y-4 rounded-xl border border-slate-700 bg-panel/90 p-4">
-      <h2 className="text-lg font-semibold">Configuration</h2>
+      <h2 className="text-lg font-semibold">Project Configuration</h2>
       {recipe.inputs.map((input) => {
         if (input.type === 'entityList') {
           const entities = normalizeEntities(config[input.name]);

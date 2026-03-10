@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { parse, stringify } from 'yaml';
 import ArchitecturePreview from './components/ArchitecturePreview';
 import ConfigPanel from './components/ConfigPanel';
+import GenerationMetadata from './components/GenerationMetadata';
 import GenerateButton from './components/GenerateButton';
 import HeroSection from './components/HeroSection';
 import RecipeSelector from './components/RecipeSelector';
@@ -185,7 +186,7 @@ export default function App() {
 
   const step1Valid = Boolean(selectedRecipe);
   const step2Valid = step1Valid && validateConfig(currentRecipe, config) && !yamlError;
-  const maxAvailableStep = step1Valid ? (step2Valid ? 3 : 2) : 1;
+  const maxAvailableStep = step1Valid ? 2 : 1;
 
   const switchStep = (nextStep: number) => {
     if (nextStep <= maxAvailableStep) {
@@ -261,24 +262,34 @@ export default function App() {
 
           {step >= 2 && (
             <section className="space-y-4 rounded-xl border border-slate-700/80 bg-panel/90 p-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <button
-                  type="button"
-                  className={`rounded px-3 py-1 text-sm ${mode === 'form' ? 'bg-accent text-white' : 'bg-slate-700'}`}
-                  onClick={() => setMode('form')}
-                >
-                  Form Mode
-                </button>
-                <button
-                  type="button"
-                  className={`rounded px-3 py-1 text-sm ${mode === 'yaml' ? 'bg-accent text-white' : 'bg-slate-700'}`}
-                  onClick={() => setMode('yaml')}
-                >
-                  YAML Mode
-                </button>
-                <button type="button" className="rounded bg-slate-700 px-3 py-1 text-sm" onClick={handleCopyYaml}>
-                  Copy YAML
-                </button>
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h2 className="text-lg font-semibold">Configure Project</h2>
+                  <p className="mt-1 text-sm text-slate-300">
+                    Update the service, entities, and fields, then generate the project ZIP from this same workspace.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    className={`rounded px-3 py-1 text-sm ${mode === 'form' ? 'bg-accent text-white' : 'bg-slate-700'}`}
+                    onClick={() => setMode('form')}
+                  >
+                    Project Form
+                  </button>
+                  <button
+                    type="button"
+                    className={`rounded px-3 py-1 text-sm ${mode === 'yaml' ? 'bg-accent text-white' : 'bg-slate-700'}`}
+                    onClick={() => setMode('yaml')}
+                  >
+                    YAML Editor
+                  </button>
+                  {mode === 'yaml' && (
+                    <button type="button" className="rounded border border-slate-600 bg-slate-900 px-3 py-1 text-sm" onClick={handleCopyYaml}>
+                      Copy YAML
+                    </button>
+                  )}
+                </div>
               </div>
 
               {mode === 'form' ? (
@@ -286,19 +297,29 @@ export default function App() {
               ) : (
                 <YamlEditor value={yamlText} error={yamlError} onChange={handleYamlChange} />
               )}
-            </section>
-          )}
 
-          {step === 3 && (
-            <section className="rounded-xl border border-slate-700/80 bg-panel/90 p-4">
-              <h2 className="mb-3 text-lg font-semibold">Generate Project</h2>
-              <GenerateButton disabled={generating || loadingRecipes || !step2Valid} onClick={handleGenerate} />
-              <p className="mt-3 text-sm text-slate-300">{status || 'Generated ZIP download status will appear here.'}</p>
+              <section className="rounded-xl border border-slate-700/80 bg-slate-950/40 p-4">
+                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold">Generate Project</h3>
+                    <p className="mt-1 text-sm text-slate-300">
+                      {step2Valid
+                        ? 'Project configuration looks valid. Generate the ZIP when ready.'
+                        : 'Complete the required project fields before generating.'}
+                    </p>
+                  </div>
+                  <GenerateButton disabled={generating || loadingRecipes || !step2Valid} onClick={handleGenerate} />
+                </div>
+                <p className="mt-3 text-sm text-slate-300">{status || 'Generated ZIP download status will appear here.'}</p>
+              </section>
             </section>
           )}
         </div>
 
-        <ArchitecturePreview recipe={currentRecipe} config={config} />
+        <div className="space-y-4">
+          <GenerationMetadata />
+          <ArchitecturePreview recipe={currentRecipe} config={config} />
+        </div>
       </div>
 
       <footer className="flex flex-wrap items-center gap-3 border-t border-slate-800 pt-4 text-sm text-slate-400">

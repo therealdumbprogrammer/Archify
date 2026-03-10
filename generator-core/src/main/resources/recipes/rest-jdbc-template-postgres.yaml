@@ -1,0 +1,19 @@
+name: jdbc-template-postgres
+description: Single Spring Boot REST service with Spring JDBC JdbcTemplate and PostgreSQL
+diagram:
+  nodes:
+    - id: service
+      label: serviceName
+    - id: database
+      label: postgres
+  edges:
+    - source: service
+      target: database
+      label: JdbcTemplate
+inputs:
+  - name: serviceName
+    type: string
+    required: true
+  - name: entities
+    type: entityList
+    required: true
