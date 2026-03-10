@@ -1,6 +1,6 @@
 # Archify Generated Project
 
-Recipe: `jdbc-template-postgres`
+Recipe: `rest-jdbc-template-postgres`
 
 This project uses Spring Boot, `JdbcTemplate`, and PostgreSQL.
 

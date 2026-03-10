@@ -14,8 +14,8 @@ public class RecipeLoader {
     private static final String RECIPE_PATH_PREFIX = "recipes/";
     private static final String YAML_SUFFIX = ".yaml";
     private static final List<String> KNOWN_RECIPES = List.of(
-            "jdbc-template-h2",
-            "jdbc-template-postgres",
+            "rest-jdbc-template-h2",
+            "rest-jdbc-template-postgres",
             "rest-h2",
             "rest-postgres",
             "two-service-rest");

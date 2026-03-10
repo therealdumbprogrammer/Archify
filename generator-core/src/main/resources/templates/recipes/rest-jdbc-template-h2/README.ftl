@@ -1,6 +1,6 @@
 # Archify Generated Project
 
-Recipe: `jdbc-template-h2`
+Recipe: `rest-jdbc-template-h2`
 
 This project uses Spring Boot, `JdbcTemplate`, and H2.
 

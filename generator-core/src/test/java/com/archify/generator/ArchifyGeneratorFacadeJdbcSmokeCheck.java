@@ -17,8 +17,8 @@ public final class ArchifyGeneratorFacadeJdbcSmokeCheck {
     public static void main(String[] args) throws Exception {
         ArchifyGeneratorFacade facade = new ArchifyGeneratorFacade();
 
-        verifyH2(unzip(facade.generateZip("jdbc-template-h2", sampleConfig())));
-        verifyPostgres(unzip(facade.generateZip("jdbc-template-postgres", sampleConfig())));
+        verifyH2(unzip(facade.generateZip("rest-jdbc-template-h2", sampleConfig())));
+        verifyPostgres(unzip(facade.generateZip("rest-jdbc-template-postgres", sampleConfig())));
     }
 
     private static void verifyH2(Map<String, String> files) {
@@ -40,7 +40,7 @@ public final class ArchifyGeneratorFacadeJdbcSmokeCheck {
         String root = "archify-project/inventory-service/";
         requireContains(files.get(root + "pom.xml"), "<artifactId>postgresql</artifactId>");
         requireContains(files.get(root + "src/main/resources/application.yml"), "jdbc:postgresql://localhost:5432/${spring.application.name}");
-        requireContains(files.get("archify-project/README.md"), "jdbc-template-postgres");
+        requireContains(files.get("archify-project/README.md"), "rest-jdbc-template-postgres");
     }
 
     private static Map<String, Object> sampleConfig() {

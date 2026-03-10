@@ -1,4 +1,4 @@
-name: jdbc-template-postgres
+name: rest-jdbc-template-postgres
 description: Single Spring Boot REST service with Spring JDBC JdbcTemplate and PostgreSQL
 diagram:
   nodes:

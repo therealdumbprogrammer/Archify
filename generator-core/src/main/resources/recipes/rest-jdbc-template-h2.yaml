@@ -1,4 +1,4 @@
-name: jdbc-template-h2
+name: rest-jdbc-template-h2
 description: Single Spring Boot REST service with Spring JDBC JdbcTemplate and H2
 diagram:
   nodes:

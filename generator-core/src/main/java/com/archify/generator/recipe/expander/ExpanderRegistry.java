@@ -9,8 +9,8 @@ public class ExpanderRegistry {
     public ExpanderRegistry() {
         expanders.put("rest-postgres", new RestPostgresExpander());
         expanders.put("rest-h2", new RestH2Expander());
-        expanders.put("jdbc-template-h2", new JdbcTemplateH2Expander());
-        expanders.put("jdbc-template-postgres", new JdbcTemplatePostgresExpander());
+        expanders.put("rest-jdbc-template-h2", new JdbcTemplateH2Expander());
+        expanders.put("rest-jdbc-template-postgres", new JdbcTemplatePostgresExpander());
         expanders.put("two-service-rest", new TwoServiceRestExpander());
     }
 
